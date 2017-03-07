@@ -13,3 +13,9 @@ SnailDoor creates a file for every possible byte, then polls those files regular
 When SnailDoor reads a newline it executes the command now in its buffer, and saves the results to another hosted file (output.txt).
 
 Tada! You have a painfully slow remote shell!
+
+## Disclaimer
+
+I made this tool for fun and to demonstrate an unusual technique. It is not intended for criminal purposes, and you should check the terms of service for any system you mean to deploy SnailDoor on.
+
+Further, SnailDoor has no means of authentication. If you leave SnailDoor running, realize you are giving the whole world a (very slow) shell on your machine.
