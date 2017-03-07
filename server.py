@@ -8,7 +8,9 @@ class ByteFile(object):
 		self.accesstime = accesstime
 
 def touch(path):
-	open(path, 'w').close()
+	f = open(path, 'w')
+	f.write("X")
+	f.close()
 
 def createByteFiles(hostDir):
 	if( not os.path.exists(hostDir) ):
