@@ -22,6 +22,11 @@ def createByteFiles(hostDir):
 
 	return byteFiles
 
+def executeCommand(cmd, outputfilepath):
+	result = os.popen(cmd).read()
+	with open(outputfilepath, "w") as out:
+		out.write(result + "\n")
+
 if __name__ == "__main__":
 	if( len(sys.argv) != 2 ):
 		print "USAGE: %s <hosting_directory>" % sys.argv[0]
@@ -44,9 +49,18 @@ if __name__ == "__main__":
 	buf = []
 	while(True):
 		time.sleep(0.1)
+
+		# Poll access time for everyone
 		for bf in byteFiles:
 			newtime = os.path.getatime(bf.path)
 			if( newtime != bf.accesstime ):
-				buf += [chr(bf.byte)]
+				byte = chr(bf.byte)
 				print "Ready byte '%d'" % bf.byte
 				bf.accesstime = newtime
+				if( byte == '\n' ):
+					cmd = "".join(buf)
+					executeCommand(cmd, hostDir + "/output.txt")
+					print "Executed command '%s'" % cmd
+					buf = []
+				else:
+					buf += [byte]
