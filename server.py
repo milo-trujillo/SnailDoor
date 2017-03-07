@@ -24,8 +24,9 @@ def createByteFiles(hostDir):
 
 def executeCommand(cmd, outputfilepath):
 	result = os.popen(cmd).read()
-	with open(outputfilepath, "w") as out:
-		out.write(result + "\n")
+	out = open(outputfilepath, "w")
+	out.write(result + "\n")
+	out.close()
 
 if __name__ == "__main__":
 	if( len(sys.argv) != 2 ):
